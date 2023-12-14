@@ -27,6 +27,13 @@ export type LoginResponse = BaseResponse & {
   };
 };
 
+export type UpdateUserRequest = {
+  nama?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+};
+
 export type GetUsersResponse = BaseResponse & {
   data: {
     users: Pick<User, "id" | "nama" | "email" | "phone">[];

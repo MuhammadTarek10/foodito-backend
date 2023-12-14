@@ -41,7 +41,9 @@ class UserController {
   public getUsers: ExpressHandler<BaseRequest, GetUsersResponse> = async (
     req,
     res
-  ) => {};
+  ) => {
+    const userId = res.locals.userId;
+  };
 
   public getUserById: ExpressHandlerWithParams<
     { id: string },
@@ -49,6 +51,20 @@ class UserController {
     GetUsersResponse
   > = async (req, res) => {
     const id = req.params.id;
+  };
+
+  public updateUser: ExpressHandler<BaseRequest, GetUsersResponse> = async (
+    req,
+    res
+  ) => {
+    const userId = res.locals.userId;
+  };
+
+  public deleteUser: ExpressHandler<BaseRequest, GetUsersResponse> = async (
+    req,
+    res
+  ) => {
+    const userId = res.locals.userId;
   };
 }
 
