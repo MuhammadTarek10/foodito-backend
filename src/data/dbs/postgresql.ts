@@ -5,6 +5,21 @@ import { User } from "../../models/user.model";
 import { DataSource } from "../dao/datasource.dao";
 
 export default class Postgresql implements DataSource {
+  async getFoodByUserId(userId: string): Promise<Food[] | undefined> {
+    throw new Error("Method not implemented.");
+  }
+  async getOrderByUserId(userId: string): Promise<Order[] | undefined> {
+    throw new Error("Method not implemented.");
+  }
+  async getMyOrders(id: string): Promise<Order[] | undefined> {
+    throw new Error("Method not implemented.");
+  }
+  async getMyFood(id: string): Promise<Food[] | undefined> {
+    throw new Error("Method not implemented.");
+  }
+  async getMyRooms(id: string): Promise<Room[] | undefined> {
+    throw new Error("Method not implemented.");
+  }
   async createUser(user: User): Promise<User> {
     throw new Error("Method not implemented.");
   }
@@ -38,16 +53,10 @@ export default class Postgresql implements DataSource {
   async createFood(id: string, roomId: string, food: Food): Promise<Food> {
     throw new Error("Method not implemented.");
   }
-  async getFoods(): Promise<Food[]> {
-    throw new Error("Method not implemented.");
-  }
   async getFoodById(id: string): Promise<Food | undefined> {
     throw new Error("Method not implemented.");
   }
   async getFoodByRoomId(roomId: string): Promise<Food[] | undefined> {
-    throw new Error("Method not implemented.");
-  }
-  async getFoodByUserId(userId: string): Promise<Food[] | undefined> {
     throw new Error("Method not implemented.");
   }
   async updateFood(id: string, food: Food): Promise<Food | undefined> {
@@ -64,13 +73,7 @@ export default class Postgresql implements DataSource {
   ): Promise<Order> {
     throw new Error("Method not implemented.");
   }
-  async getOrders(): Promise<Order[]> {
-    throw new Error("Method not implemented.");
-  }
   async getOrderById(id: string): Promise<Order | undefined> {
-    throw new Error("Method not implemented.");
-  }
-  async getOrderByUserId(userId: string): Promise<Order[] | undefined> {
     throw new Error("Method not implemented.");
   }
   async getOrderByRoomId(roomId: string): Promise<Order[] | undefined> {

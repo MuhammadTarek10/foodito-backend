@@ -8,7 +8,6 @@ export interface OrderDao {
     foodId: string
   ): Promise<Order>;
 
-  getOrders(): Promise<Order[]>;
   getOrderById(id: string): Promise<Order | undefined>;
   getOrderByUserId(userId: string): Promise<Order[] | undefined>;
   getOrderByRoomId(roomId: string): Promise<Order[] | undefined>;

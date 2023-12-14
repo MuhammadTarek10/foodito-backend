@@ -5,6 +5,9 @@ import authMiddleware from "../middlewares/auth.middleware";
 import errorMiddleware from "../middlewares/error.middleware";
 import loggerMiddleware from "../middlewares/logger.middleware";
 import authRouter from "../routes/auth.router";
+import foodRouter from "../routes/food.router";
+import orderRouter from "../routes/order.router";
+import roomRouter from "../routes/room.router";
 import userRouter from "../routes/user.router";
 
 export default function (app: express.Express): void {
@@ -17,4 +20,7 @@ export default function (app: express.Express): void {
   app.use("/", authRouter);
   app.use(authMiddleware);
   app.use("/users", userRouter);
+  app.use("/rooms", roomRouter);
+  app.use("/rooms/:roomId/food", foodRouter);
+  app.use("/rooms/:roomId/orders", orderRouter);
 }

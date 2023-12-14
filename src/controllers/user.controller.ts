@@ -53,6 +53,8 @@ class UserController {
     const id = req.params.id;
   };
 
+  
+
   public updateUser: ExpressHandler<BaseRequest, GetUsersResponse> = async (
     req,
     res
