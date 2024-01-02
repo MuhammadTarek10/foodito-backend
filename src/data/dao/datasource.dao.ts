@@ -1,3 +1,4 @@
+import Postgresql from "../dbs/postgresql";
 import { FoodDao } from "./food.dao";
 import { OrderDao } from "./order.dao";
 import { RoomDao } from "./room.dao";
@@ -7,6 +8,6 @@ export interface DataSource extends UserDao, RoomDao, FoodDao, OrderDao {}
 
 export let db: DataSource;
 
-export function initDataSource(dataSource: DataSource) {
-  db = dataSource;
+export function initDataSource() {
+  db = new Postgresql();
 }

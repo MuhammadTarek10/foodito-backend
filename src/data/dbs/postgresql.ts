@@ -5,6 +5,9 @@ import { User } from "../../models/user.model";
 import { DataSource } from "../dao/datasource.dao";
 
 export default class Postgresql implements DataSource {
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    throw new Error("Method not implemented.");
+  }
   async getFoodByUserId(userId: string): Promise<Food[] | undefined> {
     throw new Error("Method not implemented.");
   }
@@ -20,7 +23,7 @@ export default class Postgresql implements DataSource {
   async getMyRooms(id: string): Promise<Room[] | undefined> {
     throw new Error("Method not implemented.");
   }
-  async createUser(user: User): Promise<User> {
+  async createUser(user: User): Promise<void> {
     throw new Error("Method not implemented.");
   }
   async getUsers(): Promise<User[]> {
@@ -29,7 +32,7 @@ export default class Postgresql implements DataSource {
   async getUserById(id: string): Promise<User | undefined> {
     throw new Error("Method not implemented.");
   }
-  async updateUser(id: string, user: User): Promise<User | undefined> {
+  async updateUser(user: User): Promise<User | undefined> {
     throw new Error("Method not implemented.");
   }
   async deleteUser(id: string): Promise<boolean> {

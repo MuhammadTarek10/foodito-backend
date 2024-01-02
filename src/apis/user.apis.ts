@@ -2,7 +2,8 @@ import { User } from "../models/user.model";
 import { BaseResponse } from "./base.apis";
 
 export type RegisterRequest = {
-  nama: string;
+  id: string;
+  name: string;
   email: string;
   password: string;
   phone: string;
@@ -10,7 +11,7 @@ export type RegisterRequest = {
 
 export type RegisterResponse = BaseResponse & {
   data: {
-    user: Pick<User, "id" | "nama" | "email" | "phone">;
+    user: Pick<User, "id" | "name" | "email" | "phone">;
     token: string;
   };
 };
@@ -22,20 +23,21 @@ export type LoginRequest = {
 
 export type LoginResponse = BaseResponse & {
   data: {
-    user: Pick<User, "id" | "nama" | "email" | "phone">;
+    user: Pick<User, "id" | "name" | "email" | "phone">;
     token: string;
   };
 };
 
 export type UpdateUserRequest = {
-  nama?: string;
+  name?: string;
   email?: string;
   phone?: string;
-  password?: string;
 };
 
 export type GetUsersResponse = BaseResponse & {
-  data: {
-    users: Pick<User, "id" | "nama" | "email" | "phone">[];
-  };
+  data: Pick<User, "id" | "name" | "email" | "phone">[];
+};
+
+export type UserResponse = BaseResponse & {
+  data: Pick<User, "id" | "name" | "email" | "phone">;
 };
