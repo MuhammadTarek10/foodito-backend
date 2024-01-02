@@ -25,11 +25,64 @@ Content-Type: application/json
 }
 
 ### * BACKGROUND LOGIN
-GET http://localhost:4000/users
+GET http://localhost:4000/users/my
 Content-Type: application/json
 Authorization: Bearer asd
 
 ### * GET ALL USERS
-GET http://localhost:4000/users/users
+GET http://localhost:4000/users
 Content-Type: application/json
 Authorization: Bearer asd
+
+
+### * GET USER BY ID
+GET http://localhost:4000/users/user/:id
+Content-Type: application/json
+
+
+### * UPDATE USER
+PUT http://localhost:4000/users/user/:id
+Content-Type: application/json
+
+{
+    "id": "123123",
+    "email": "updated@gmail.com",
+    "password": "12345678",
+    "name": "Tarek",
+    "phone": "124121242145125"
+}
+
+### * DELETE USER
+DELETE http://localhost:4000/users/user/:id
+Content-Type: application/json
+
+
+### * GET ALL ROOMS
+GET http://localhost:4000/rooms
+Content-Type: application/json
+
+### * GET ROOM BY ID
+GET http://localhost:4000/rooms/room/:id
+Content-Type: application/json
+
+### * CREATE ROOM
+POST http://localhost:4000/rooms
+Content-Type: application/json
+
+{
+    "name": "Room 1",
+    "code": "124fsafsaf",
+}
+
+### * UPDATE ROOM
+PUT http://localhost:4000/rooms/room/:id
+Content-Type: application/json
+
+{
+    "name": "Room 1",
+    "code": "124fsafsaf",
+}
+
+### * DELETE ROOM
+DELETE http://localhost:4000/rooms/room/:id
+Content-Type: application/json
