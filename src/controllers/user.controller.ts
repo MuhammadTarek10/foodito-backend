@@ -1,4 +1,4 @@
-import { BaseRequest, BaseResponse } from "../apis/base.apis";
+import { BaseResponse } from "../apis/base.apis";
 import {
   GetUsersResponse,
   LoginRequest,
@@ -16,20 +16,22 @@ import {
 import { db } from "../data/dao/datasource.dao";
 import { AuthHelper } from "../middlewares/auth.middleware";
 import { User } from "../models/user.model";
+import { UserValidator } from "../utils/user.validator";
 
 class UserController {
   public register: ExpressHandler<RegisterRequest, RegisterResponse> = async (
     req,
     res
   ) => {
-    const { id, name, email, password, phone } = req.body;
+    const { error, value } = UserValidator.registerSchema.validate(req.body);
 
-    if (!id || !name || !email || !password || !phone)
+    if (error)
       return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
-        message: "Please enter all the fields",
+        message: error.message,
       });
 
+    const { id, name, email, password, phone } = value;
     try {
       if (await db.getUserByEmail(email))
         return res.status(StatusCodes.CONFLICT).json({
@@ -66,14 +68,15 @@ class UserController {
     req,
     res
   ) => {
-    const { email, password } = req.body;
+    const { error, value } = UserValidator.loginSchema.validate(req.body);
 
-    if (!email || !password)
+    if (error)
       return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
-        message: "Enter Email and Password",
+        message: error.message,
       });
 
+    const { email, password } = value;
     try {
       const user = await db.getUserByEmail(email);
       if (!user || user.password != password)
@@ -98,7 +101,7 @@ class UserController {
     }
   };
 
-  public getUserByToken: ExpressHandler<BaseRequest, LoginResponse> = async (
+  public getUserByToken: ExpressHandler<void, LoginResponse> = async (
     req,
     res
   ) => {
@@ -121,7 +124,7 @@ class UserController {
     }
   };
 
-  public getUsers: ExpressHandler<BaseRequest, GetUsersResponse> = async (
+  public getUsers: ExpressHandler<void, GetUsersResponse> = async (
     req,
     res
   ) => {
@@ -142,7 +145,7 @@ class UserController {
 
   public getUserById: ExpressHandlerWithParams<
     { id: string },
-    BaseRequest,
+    void,
     UserResponse
   > = async (req, res) => {
     const id = req.params.id;
@@ -188,7 +191,7 @@ class UserController {
         phone: phone || user.phone,
       };
 
-      await db.updateUser(user);
+      await db.updateUser(editedUser);
       return res.status(StatusCodes.OK).json({
         success: true,
         message: "User Updated Successfully",
@@ -202,7 +205,7 @@ class UserController {
     }
   };
 
-  public deleteUser: ExpressHandler<BaseRequest, BaseResponse> = async (
+  public deleteUserById: ExpressHandler<void, BaseResponse> = async (
     req,
     res
   ) => {

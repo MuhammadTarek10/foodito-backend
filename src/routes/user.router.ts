@@ -12,6 +12,6 @@ router.get("/:id", controller.getUserById);
 // router.get("/:id/orders", controller.getMyOrders);
 
 router.put("/", controller.updateUser);
-router.delete("/", controller.deleteUser);
+router.delete("/", controller.deleteUserById);
 
 export default router;

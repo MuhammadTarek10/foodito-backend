@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import asyncHandler from "express-async-handler";
 import helmet from "helmet";
 import { AuthHelper } from "../middlewares/auth.middleware";
 import errorMiddleware from "../middlewares/error.middleware";
@@ -19,11 +20,11 @@ export default function (app: express.Express): void {
   app.use(loggerMiddleware);
   app.use(errorMiddleware);
 
-  app.use("/", authRouter);
+  app.use("/", asyncHandler(authRouter));
   app.use(AuthHelper.jwtMiddleware);
 
-  app.use("/users", userRouter);
-  app.use("/rooms", roomRouter);
-  app.use("/rooms/:roomId/food", foodRouter);
-  app.use("/rooms/:roomId/orders", orderRouter);
+  app.use("/users", asyncHandler(userRouter));
+  app.use("/rooms", asyncHandler(roomRouter));
+  app.use("/rooms/:roomId/food", asyncHandler(foodRouter));
+  app.use("/rooms/:roomId/orders", asyncHandler(orderRouter));
 }

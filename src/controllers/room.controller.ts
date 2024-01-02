@@ -1,4 +1,3 @@
-import { BaseRequest } from "../apis/base.apis";
 import { RoomRequest, RoomResponse, RoomsResponse } from "../apis/room.apis";
 import { StatusCodes } from "../config/constants/status_codes";
 import {
@@ -6,19 +5,21 @@ import {
   ExpressHandlerWithParams,
 } from "../config/types/types";
 import { db } from "../data/dao/datasource.dao";
+import { RoomValidator } from "../utils/room.validator";
 
 class RoomController {
   public createRoom: ExpressHandler<RoomRequest, RoomResponse> = async (
     req,
     res
   ) => {
-    const { id, name, code } = req.body;
-    if (!id || !name || !code)
+    const { error, value } = RoomValidator.roomSchema.validate(req.body);
+    if (error)
       return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
-        message: "Please enter all the fields",
+        message: error.message,
       });
 
+    const { id, name, code } = value;
     try {
       const room = {
         id: id,
@@ -40,10 +41,7 @@ class RoomController {
     }
   };
 
-  public getRooms: ExpressHandler<BaseRequest, RoomsResponse> = async (
-    req,
-    res
-  ) => {
+  public getRooms: ExpressHandler<void, RoomsResponse> = async (req, res) => {
     try {
       const rooms = await db.getRooms();
       return res.status(StatusCodes.OK).json({
@@ -61,7 +59,7 @@ class RoomController {
 
   public getRoomById: ExpressHandlerWithParams<
     { roomId: string },
-    BaseRequest,
+    void,
     RoomResponse
   > = async (req, res) => {
     const roomId = req.params.roomId;
@@ -136,7 +134,7 @@ class RoomController {
 
   public deleteRoomById: ExpressHandlerWithParams<
     { roomId: string },
-    BaseRequest,
+    void,
     RoomResponse
   > = async (req, res) => {
     const roomId = req.params.roomId;
