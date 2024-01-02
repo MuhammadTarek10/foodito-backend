@@ -183,9 +183,9 @@ class UserController {
 
       const editedUser = {
         id: user.id,
-        name: name ?? user.name,
-        email: email ?? user.email,
-        phone: phone ?? user.phone,
+        name: name || user.name,
+        email: email || user.email,
+        phone: phone || user.phone,
       };
 
       await db.updateUser(user);

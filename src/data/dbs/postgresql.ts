@@ -47,7 +47,7 @@ export default class Postgresql implements DataSource {
   async getRoomById(id: string): Promise<Room | undefined> {
     throw new Error("Method not implemented.");
   }
-  async updateRoom(id: string, room: Room): Promise<Room | undefined> {
+  async updateRoom(room: Room): Promise<Room | undefined> {
     throw new Error("Method not implemented.");
   }
   async deleteRoom(id: string): Promise<boolean> {

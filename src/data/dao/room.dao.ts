@@ -6,7 +6,7 @@ export interface RoomDao {
   getRooms(): Promise<Room[]>;
   getRoomById(id: string): Promise<Room | undefined>;
 
-  updateRoom(id: string, room: Room): Promise<Room | undefined>;
+  updateRoom(room: Room): Promise<Room | undefined>;
 
   deleteRoom(id: string): Promise<boolean>;
 }
