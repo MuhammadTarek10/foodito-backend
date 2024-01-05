@@ -25,7 +25,7 @@ export class LoggerService {
       transports: [
         new _transports.Console(),
         new _transports.File({
-          filename: `${process.env.LOG_FILE_PATH}/${route}.log`,
+          filename: `${process.env.LOG_FILE_PATH}/${this.route}.log`,
         }),
       ],
     });

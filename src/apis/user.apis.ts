@@ -1,3 +1,6 @@
+import { Food } from "../models/food.model";
+import { Order } from "../models/order.model";
+import { Room } from "../models/room.model";
 import { User } from "../models/user.model";
 import { BaseResponse } from "./base.apis";
 
@@ -40,4 +43,16 @@ export type GetUsersResponse = BaseResponse & {
 
 export type UserResponse = BaseResponse & {
   data: Pick<User, "id" | "name" | "email" | "phone">;
+};
+
+export type GetMyFoodResponse = BaseResponse & {
+  data: Food[];
+};
+
+export type GetMyRoomsResponse = BaseResponse & {
+  data: Room[];
+};
+
+export type GetMyOrdersResponse = BaseResponse & {
+  data: Order[];
 };

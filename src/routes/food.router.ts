@@ -1,14 +1,15 @@
 import express from "express";
+import { controller } from "../controllers/food.controller";
 
 const router = express.Router();
 
-router.post("/", (req, res) => {});
+router.post("/:roomId", controller.createFood);
 
-router.get("/", (req, res) => {}); // * by room id
-router.get("/:id", (req, res) => {}); // * by food id
-router.get("user/:id", (req, res) => {}); // * by user id
+router.get("/:roomId", controller.getFoodsByRoomId);
+router.get("/:id", controller.getFoodById);
+router.get("/user/:userId", controller.getFoodsByUserId);
 
-router.put("/:id", (req, res) => {}); // * by food id
-router.delete("/:id", (req, res) => {}); // * by food id
+router.put("/:id", controller.updateFood);
+router.delete("/:id", controller.deleteFood);
 
 export default router;

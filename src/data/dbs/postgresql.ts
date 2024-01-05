@@ -5,10 +5,13 @@ import { User } from "../../models/user.model";
 import { DataSource } from "../dao/datasource.dao";
 
 export default class Postgresql implements DataSource {
+  getRoomsByUserId(userId: string): Promise<Room[] | undefined> {
+    throw new Error("Method not implemented.");
+  }
   async getUserByEmail(email: string): Promise<User | undefined> {
     throw new Error("Method not implemented.");
   }
-  async getFoodByUserId(userId: string): Promise<Food[] | undefined> {
+  async getFoodsByUserId(userId: string): Promise<Food[] | undefined> {
     throw new Error("Method not implemented.");
   }
   async getOrderByUserId(userId: string): Promise<Order[] | undefined> {
@@ -59,10 +62,10 @@ export default class Postgresql implements DataSource {
   async getFoodById(id: string): Promise<Food | undefined> {
     throw new Error("Method not implemented.");
   }
-  async getFoodByRoomId(roomId: string): Promise<Food[] | undefined> {
+  async getFoodsByRoomId(roomId: string): Promise<Food[] | undefined> {
     throw new Error("Method not implemented.");
   }
-  async updateFood(id: string, food: Food): Promise<Food | undefined> {
+  async updateFood(food: Food): Promise<Food | undefined> {
     throw new Error("Method not implemented.");
   }
   async deleteFood(id: string): Promise<boolean> {

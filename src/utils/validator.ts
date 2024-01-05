@@ -1,17 +1,37 @@
+import Joi from "joi";
+
 export class Validator {
-  isValidEmail(email: string): Boolean {
+  static loginSchema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).max(30).required(),
+  });
+
+  static registerSchema = Joi.object({
+    id: Joi.string().uuid().required(),
+    name: Joi.string().min(3).max(30).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).max(30).required(),
+    phone: Joi.string().min(10).max(50).required(),
+  });
+
+  static foodSchema = Joi.object({
+    id: Joi.string().uuid().required(),
+    name: Joi.string().required(),
+    price: Joi.number().required(),
+    restaurant: Joi.string(),
+  });
+
+  static roomSchema = Joi.object({
+    id: Joi.string().uuid().required(),
+    name: Joi.string().min(3).max(30).required(),
+    code: Joi.string().min(6).max(30).required(),
+  });
+
+  static isValidEmail(email: string): Boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  isValidPassword(password: string): Boolean {
+  static isValidPassword(password: string): Boolean {
     return password.length >= 8;
-  }
-
-  isValidName(name: string): Boolean {
-    return name.length >= 2;
-  }
-
-  isValidPhone(phone: string): Boolean {
-    return phone.length >= 10;
   }
 }

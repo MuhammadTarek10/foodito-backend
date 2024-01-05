@@ -5,14 +5,14 @@ import {
   ExpressHandlerWithParams,
 } from "../config/types/types";
 import { db } from "../data/dao/datasource.dao";
-import { RoomValidator } from "../utils/room.validator";
+import { Validator } from "../utils/validator";
 
 class RoomController {
   public createRoom: ExpressHandler<RoomRequest, RoomResponse> = async (
     req,
     res
   ) => {
-    const { error, value } = RoomValidator.roomSchema.validate(req.body);
+    const { error, value } = Validator.roomSchema.validate(req.body);
     if (error)
       return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,

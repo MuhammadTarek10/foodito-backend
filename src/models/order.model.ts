@@ -5,6 +5,6 @@ export interface Order {
   price: string;
   restaurant: string;
   comment: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

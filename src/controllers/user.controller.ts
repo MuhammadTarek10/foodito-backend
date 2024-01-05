@@ -1,5 +1,8 @@
 import { BaseResponse } from "../apis/base.apis";
 import {
+  GetMyFoodResponse,
+  GetMyOrdersResponse,
+  GetMyRoomsResponse,
   GetUsersResponse,
   LoginRequest,
   LoginResponse,
@@ -16,14 +19,14 @@ import {
 import { db } from "../data/dao/datasource.dao";
 import { AuthHelper } from "../middlewares/auth.middleware";
 import { User } from "../models/user.model";
-import { UserValidator } from "../utils/user.validator";
+import { Validator } from "../utils/validator";
 
 class UserController {
   public register: ExpressHandler<RegisterRequest, RegisterResponse> = async (
     req,
     res
   ) => {
-    const { error, value } = UserValidator.registerSchema.validate(req.body);
+    const { error, value } = Validator.registerSchema.validate(req.body);
 
     if (error)
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -68,7 +71,7 @@ class UserController {
     req,
     res
   ) => {
-    const { error, value } = UserValidator.loginSchema.validate(req.body);
+    const { error, value } = Validator.loginSchema.validate(req.body);
 
     if (error)
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -215,6 +218,66 @@ class UserController {
       return res.status(StatusCodes.OK).json({
         success: true,
         message: "User Deleted Successfully",
+      });
+    } catch (e) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: `${e}`,
+      });
+    }
+  };
+
+  public getMyFood: ExpressHandler<void, GetMyFoodResponse> = async (
+    req,
+    res
+  ) => {
+    const userId = res.locals.userId;
+    try {
+      const food = await db.getFoodsByUserId(userId);
+      return res.status(StatusCodes.OK).json({
+        success: true,
+        message: "Food Fetched Successfully",
+        data: food,
+      });
+    } catch (e) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: `${e}`,
+      });
+    }
+  };
+
+  public getMyRooms: ExpressHandler<void, GetMyRoomsResponse> = async (
+    req,
+    res
+  ) => {
+    const userId = res.locals.userId;
+    try {
+      const rooms = await db.getRoomsByUserId(userId);
+      return res.status(StatusCodes.OK).json({
+        success: true,
+        message: "Rooms Fetched Successfully",
+        data: rooms,
+      });
+    } catch (e) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: `${e}`,
+      });
+    }
+  };
+
+  public getMyOrders: ExpressHandler<void, GetMyOrdersResponse> = async (
+    req,
+    res
+  ) => {
+    const userId = res.locals.userId;
+    try {
+      const orders = await db.getOrderByUserId(userId);
+      return res.status(StatusCodes.OK).json({
+        success: true,
+        message: "Orders Fetched Successfully",
+        data: orders,
       });
     } catch (e) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
