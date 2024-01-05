@@ -6,7 +6,11 @@ import { db } from "../data/dao/datasource.dao";
 export class AuthHelper {
   static jwtMiddleware: ExpressHandler<any, any> = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return next();
+    if (!token)
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        success: false,
+        message: "Missing token",
+      });
 
     let payload: JwtObject;
     try {

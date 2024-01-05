@@ -86,3 +86,48 @@ Content-Type: application/json
 ### * DELETE ROOM
 DELETE http://localhost:4000/rooms/room/:id
 Content-Type: application/json
+
+
+### * CREATE FOOD WITHOUT RESTAURANT
+POST http://localhost:4000/foods
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Food 1",
+    "price": 10,
+}
+
+### * CREATE FOOD WITH RESTAURANT
+POST http://localhost:4000/foods
+Content-Type: application/json
+
+{
+    "id": "2",
+    "name": "Food 1",
+    "price": 20,
+    "restaurantId": "Al Araby"
+}
+
+### * GET ALL FOODS
+GET http://localhost:4000/foods
+Content-Type: application/json
+
+### * GET FOOD BY ID
+GET http://localhost:4000/foods/1
+Content-Type: application/json
+
+### * UPDATE FOOD
+PUT http://localhost:4000/foods/1
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Updated food",
+    "price": 40,
+}
+
+### * DELETE FOOD
+DELETE http://localhost:4000/foods/1
+Content-Type: application/json
+

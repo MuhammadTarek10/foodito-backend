@@ -1,15 +1,16 @@
 import express from "express";
+import { controller } from "../controllers/order.controller";
 
 const router = express.Router();
 
-router.post("/:foodId", (req, res) => {});
+router.post("/room/:roomId/:foodId", controller.createOrder);
 
-router.get("/", (req, res) => {}); // * by room id
-router.get("/:id", (req, res) => {}); // * by order id
-router.get("food/:id", (req, res) => {}); // * by food id
-router.get("user/:id", (req, res) => {}); // * by user id
+router.get("/room/:roomId", controller.getOrdersByRoomId);
+router.get("/:id", controller.getOrderById);
+router.get("food/:foodId", controller.getOrdersByFoodId);
+router.get("user/:id", controller.getOrdersByUserId);
 
 router.put("/:id", (req, res) => {});
-router.delete("/:id", (req, res) => {});
+router.delete("/:id", controller.deleteOrder);
 
 export default router;

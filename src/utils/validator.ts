@@ -27,6 +27,11 @@ export class Validator {
     code: Joi.string().min(6).max(30).required(),
   });
 
+  static orderSchema = Joi.object({
+    id: Joi.string().uuid().required(),
+    comment: Joi.string().min(0).max(100),
+  });
+
   static isValidEmail(email: string): Boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }

@@ -25,6 +25,6 @@ export default function (app: express.Express): void {
 
   app.use("/users", asyncHandler(userRouter));
   app.use("/rooms", asyncHandler(roomRouter));
-  app.use("/food", asyncHandler(foodRouter));
-  app.use("/rooms/:roomId/orders", asyncHandler(orderRouter));
+  app.use("/foods", asyncHandler(foodRouter));
+  app.use("/orders", asyncHandler(orderRouter));
 }
